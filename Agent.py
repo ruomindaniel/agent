@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 
 def find_path_networkx(safe_locations, agent_location_x, agent_location_y):
     """networkX - finding shortest path"""
-    import pdb
-    pdb.set_trace()
 
     safe_locations.append((agent_location_x, agent_location_y))
     # remove duplicates

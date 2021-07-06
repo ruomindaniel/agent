@@ -27,6 +27,8 @@ class State(object):
         self.escape_plan = []
         self.action_plan = []
         self.step_in_action = -1
+        self.hist_stench = dict()
+        self.hist_breeze = dict()
 
     def initialize(self):
         """ initialize: called at the start of a new try, to reset game aspects back to default """

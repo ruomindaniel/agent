@@ -8,7 +8,7 @@ def main(WORLD_SIZE, PIT_PROBABILITY, allowClimbWithoutGold, VISUALIZATION, agen
         continue runs until gameover"""
 
     score = 0
-    wumpus_world = WumpusWorld()
+    wumpus_world = WumpusWorld(agent)
     #     Agent.construct()  # call the constructor on the imported agent
 
     wumpus_world.initialize()  # call initialize on the wumpus world, resetting for the try
@@ -24,7 +24,8 @@ def main(WORLD_SIZE, PIT_PROBABILITY, allowClimbWithoutGold, VISUALIZATION, agen
             wumpus_world.print_world()
         percept = wumpus_world.get_percept()  # get the percepts for the current location
         state = wumpus_world.get_state()
-        action = Agent.process(percept, state, agent)  # and pass the percepts to the imported agent, expecting an action
+        # action = Agent.process(percept, state, agent)  # and pass the percepts to the imported agent, expecting an action
+        action = wumpus_world.agent.process(percept, state, agent)
 
         if VISUALIZATION == True:
             print("Action = {}".format(action_to_string(action)))
@@ -38,9 +39,9 @@ def main(WORLD_SIZE, PIT_PROBABILITY, allowClimbWithoutGold, VISUALIZATION, agen
 
     print("Game over...")
     #     Agent.destructor()  # call the deconstructor on the imported agent for this trial is over
-
+    print(state.hist_stench)
     return score
 
 
 if __name__ == '__main__':
-    main(WORLD_SIZE, PIT_PROBABILITY, allowClimbWithoutGold, VISUALIZATION, agent='beeline')
+    main(WORLD_SIZE, PIT_PROBABILITY, allowClimbWithoutGold, VISUALIZATION, agent='prob')
