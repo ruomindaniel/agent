@@ -4,10 +4,10 @@ from Location import Location
 from State import State
 from Percept import Percept
 from Agent import find_path_networkx, escape_plan_action
-
+from ProbAgent import ProbAgent
 
 class WumpusWorld(object):
-    def __init__(self, file_information=None):
+    def __init__(self, agent, file_information=None):
         """ __init__: create a new wumpus world, randomly placing the wumpus and the gold, and multiple pits """
         self.num_actions = 0
 
@@ -16,6 +16,8 @@ class WumpusWorld(object):
 
         # Update current percepts
         self.current_percept = Percept()
+
+        self.agent = self.create_agent(agent)
 
         if Location.adjacent(self.current_state.agent_location, self.current_state.wumpus_location) or \
                 (self.current_state.agent_location == self.current_state.wumpus_location):
@@ -45,6 +47,14 @@ class WumpusWorld(object):
 
         if self.current_state.gold_location.x == 1 and self.current_state.gold_location.y == 1:
             self.current_percept.glitter = True
+
+    @staticmethod
+    def create_agent(agent):
+        if agent == 'prob':
+            my_agent = ProbAgent(WORLD_SIZE, WORLD_SIZE)
+            return my_agent
+        else:
+            return None
 
     def get_percept(self):
         """ get_percept: return the current percept for the agent's location """
@@ -168,6 +178,7 @@ class WumpusWorld(object):
                 self.current_state.agent_alive = False
             else:
                 self.current_state.agent_alive = True
+
 
         if action == TURNLEFT:
             if self.current_state.agent_orientation == RIGHT:
