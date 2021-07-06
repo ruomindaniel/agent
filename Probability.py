@@ -99,7 +99,8 @@ class Probability:
     def predict(self, observations):
         if observations is None:
             observations = {'stench11': False, 'stench42': True, 'stench33': True}
-        print(self.model.predict_proba(observations)[0].parameters)
+
+        return self.model.predict_proba(observations)[0].parameters[0]
 
 
 if __name__ == '__main__':

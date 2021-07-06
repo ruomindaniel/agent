@@ -60,7 +60,24 @@ class ProbAgent(Agent):
                 print("Executing Escape Plan...")
                 return state.action_plan[state.step_in_action]
         else:
-            self.algo.predict(state.hist_stench)
+            prediction = self.algo.predict(state.hist_stench)
+            print(prediction)
+            # neighbors = []
+            # if agent_location_x - 1 > 0:
+            #     neighbors.append({"LEFT": str(agent_location_x - 1) + "," + str(agent_location_y)})
+            # if agent_location_x + 1 <= 4:
+            #     neighbors.append({str(agent_location_x + 1) + "," + str(agent_location_y)})
+            # if agent_location_y - 1 > 0:
+            #     neighbors.append(str(agent_location_x) + "," + str(agent_location_y - 1))
+            # if agent_location_y + 1 <= 4:
+            #     neighbors.append(str(agent_location_x) + "," + str(agent_location_y + 1))
+            #
+            # cared_prediction = []
+            # for neighbor in neighbors:
+            #     cared_prediction.append(prediction[neighbor])
+            #
+            # print("Cared Prediction", cared_prediction)
+
             return random.choice([0, 1, 2, 4])  # remove Grab & Climb
 
 
